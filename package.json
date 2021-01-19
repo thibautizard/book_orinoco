@@ -1,0 +1,13 @@
+{
+  "name": "front-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch style/sass/main.scss:style/css/style.css --style expanded",
+    "prefixer": "postcss src/style/css/style.css --use autoprefixer -d src/style/css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

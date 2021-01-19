@@ -1,0 +1,75 @@
+@each $direction in $directions {
+    @keyframes flip-animation-#{$direction} {
+        from {transform: rotate#{axe($direction)}(degree($direction))};
+        to {transform: rotate#{axe($direction)}(0deg)};       
+    }
+}
+
+// FADING ANIMATIONS
+
+@keyframes fade {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+@keyframes fadeInUp {
+    from {
+        transform : translateY(20px);
+        opacity:0;
+    }
+
+    to {
+        transform : translateY(0px);
+        opacity:1;
+    }
+}
+
+@keyframes fadeInBottom {
+    from {
+        transform : translateY(-20px);
+        opacity:0;
+    }
+
+    to {
+        transform : translateY(0px);
+        opacity:1;
+    }
+}
+
+@keyframes arrowSliding {
+    0% {
+        transform:translateX(0px);
+        opacity: 1;
+    }
+
+    35% {
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateX(30px);
+    }  
+    
+    51% {
+        transform: translateX(-30px); 
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        transform:translate(0px);
+        opacity: 1;
+    }
+}
+
+// POP UP ANIMATION
+
+@keyframes popUp{
+    0%{transform:scale(0.7); opacity:0;}
+    50%{opacity:1;}
+    70%{transform:scale(1.2); opacity:1;}
+    100%{transform:scale(1); visibility:visible;}
+}
+

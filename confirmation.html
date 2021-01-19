@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./style/css/style.css"/>
+    <script src="./scripts/animations.js" defer></script>
+    <script src="./scripts/utils.js" defer></script>
+    <script src="./scripts/settle.js" defer></script>
+    <script src="./confirmation.js" defer></script>
+    <title>Orinoco</title>
+</head>
+<body>
+    <div id="root">
+        <header>
+            <nav>
+                    
+                <!-- HOME -->
+                <a href="./index.html" class="navbar-brand">
+                    <i class="fa fa-home"></i>
+                </a>
+
+                <!-- LOGO -->
+                <a href="./index.html" class="nav-title">
+                    Orinoco
+                </a>
+            
+
+                <!-- PANIER -->
+                <a href="./commande.html" class="navbar-brand">
+                        <i class="fas fa-cart-plus"> </i>
+                        <div class="counter"> 0 </div>
+                </a>
+
+            </nav>
+
+        </header>
+
+        <main>
+
+            <div class="confirmation-message">
+              
+                <a href="/" class="cross-close">
+                    <i class="fas fa-times"></i>                                            
+                 </a>
+ 
+        
+                 <div class="message">
+                     <h2> Merci pour votre commande passée sur Orinoco ! 🎉 </h2> 
+                     <h4> Vous serez débité d'un montant total de <span class="total"></span> </h4> 
+                     <p> Votre numéro de commande est : <span class="order-id"></span></p>
+                 </div>
+
+             </div>
+
+        </main>
+
+        <!-- POP UP -->
+        <div class="alert">
+            <p class="alert__message"> </p>
+            <input class="alert__button" type="button"  value="OK"/>
+        </div>
+
+    </div>
+</body>
+</html>

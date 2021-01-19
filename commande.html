@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./style/css/style.css"/>
+    <script src="./scripts/animations.js" defer></script>
+    <script src="./scripts/utils.js" defer></script>
+    <script src="./scripts/settle.js" defer></script>
+    <script src="./commande.js" defer></script>
+    <title>Orinoco</title>
+</head>
+<body>
+    <div id="root">
+        <header>
+            <nav>
+                    
+                <!-- HOME -->
+                <a href="./index.html" class="navbar-brand">
+                    <i class="fa fa-home"></i>
+                </a>
+
+                <!-- LOGO -->
+                <a href="./index.html" class="nav-title">
+                    Orinoco
+                </a>
+            
+
+                <!-- PANIER -->
+                <a href="./commande.html" class="navbar-brand">
+                        <i class="fas fa-cart-plus"> </i>
+                        <div class="counter"> 0 </div>
+                </a>
+
+            </nav>
+
+        </header>
+
+        <main>
+
+            <div class="cart-container">
+
+                <!-- PANIER -->
+                <div class="resume-container part-container">
+
+                    <h3 class="panier"> Votre panier </h3>
+                    
+                    <!-- TOUS LES PRODUITS -->
+                    <div class="product-resume">   
+                        
+                    </div>
+        
+                    <div class="total-container"> 
+                        <h4> Total <i class="fas fa-cart-plus"></i> </h4>
+                        <p class="total"> TOTAL </p> 
+                    </div>
+                    
+                </div>
+
+                <!-- FORMULAIRE -->
+                
+                <div class="formulaire-container  part-container">
+                    <h3 class="text-center mb-5" > Commander </h3>
+        
+                    <form method="POST">
+                        <div class="fields mb-5">
+
+
+                            <div class="form-group">
+                                <label htmlFor="firstName">Prénom</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="Entrez votre prénom" required pattern="^[a-zA-Z,.'\s-]+$" title="Les chiffres ne sont pas autorisés."/>
+                            </div>
+
+                            <div class="form-group">
+                                <label htmlFor="lastName">Nom</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Entrez votre mom" required pattern="^[a-zA-Z,.'\s-]+$" title="Les chiffres ne sont pas autorisés."/>
+                            </div>
+
+                            <div class="form-group">
+                                <label htmlFor="address">Adresse</label>
+                                <input type="text" class="form-control" id="address" placeholder="Entrez votre adresse" required pattern="^[a-zA-Z0-9,.'\s-]+$"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label htmlFor="city">Ville</label>
+                                <input type="text" class="form-control" id="city" placeholder="Entrez votre ville" required pattern="^[a-zA-Z,.'\s-]+$" title="Les chiffres ne sont pas autorisés."/>
+                            </div>
+
+                            <div class="form-group">
+                                <label htmlFor="email">Mail</label>
+                                <input type="email" class="form-control" id="email" placeholder="Entrez votre mail" required/>
+                            </div>
+
+                        </div>
+
+                        <!-- BOUTON ENVOYER -->
+                        <button type="submit" className="btn btn-primary w-100"> Envoyer <i class="fas fa-paper-plane"></i> </button>
+                    </form>
+                    <div class="cover-form"></div>                  
+                </div> 
+
+            </div>
+
+            
+        </main>
+
+        <!-- LOADER -->
+        <div class="container-loader">
+            <div class="load">
+                <div class="load__bar load__bar--1"></div>
+                <div class="load__bar load__bar--2"></div>
+                <div class="load__bar load__bar--3"></div>
+                <div class="load__bar load__bar--4"></div>
+                <div class="load__bar load__bar--5"></div>
+            </div>
+        </div>
+
+
+        <!-- POP UP -->
+        <div class="alert">
+            <p class="alert__message"> </p>
+            <input class="alert__button" type="button"  value="OK"/>
+        </div>
+
+    </div>
+</body>
+</html>

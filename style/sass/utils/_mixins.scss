@@ -1,0 +1,47 @@
+$breakpoints :  (
+    mobile: 800px,
+    desktop: 1400px
+);
+
+
+// RESPONSIVE
+
+@mixin mobile-only {
+    @media screen and (max-width: map-get($breakpoints, mobile)){
+        @content
+    }
+};
+
+@mixin non-desktop-only {
+    @media screen and (max-width: map-get($breakpoints, desktop)){
+        @content
+    }
+};
+
+// SIZING
+
+@mixin parent-size {
+    width: 100%;
+    height: 100%;;
+}
+
+// ARRANGEMENT
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-column-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+@mixin center-background {
+    display: block;
+    background-size: cover;
+    background-position: center;
+}

@@ -1,0 +1,143 @@
+.details-container {
+
+    @include flex-column-center;
+    width:85%;
+    max-width: 1400px;
+    position: relative;
+    &,.name {animation: fade .7s ease-out;}
+    .main-container {animation: fadeInBottom .7s ease-out}
+    .buttons-container {animation: fadeInUp .7s ease-out}
+    .img-container {padding:0;}
+
+    box-shadow: 2px 2px 20px 1px rgba(0,0,0,.2);
+    border-radius: 0rem;
+    padding: 2rem 3rem;
+    
+    
+    .main-container {
+        margin-bottom: 4rem;
+    }
+
+    .cross-close {
+        @include flex-center;
+        position: absolute;
+        background:white; 
+        width:60px; 
+        height:60px;
+        border-radius:50%;
+        top:-20px;
+        right:-22px;
+        box-shadow: 0 0 20px 1px rgba(0,0,0,.2);
+
+        
+
+        .fa-times:hover {
+            font-size:35px;
+            color:$redClose
+        }
+    }
+
+    
+    .name-container {
+        @include mobile-only {font-size: 8px;}
+        margin-top: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .main-container {
+        display: flex;
+        flex-wrap: wrap;
+
+        h5{font-size: 2rem;}
+
+        .img-container {
+            margin-bottom: 2rem;
+            width:47%;
+            @include mobile-only {width:100%;}
+        }
+
+        .description {
+            margin-bottom: 3rem;
+        }
+
+        .informations-container {
+            margin-left:2rem;
+            h2 {margin-top:0;}
+            width:47%;
+            @include mobile-only {width:100%;}
+            @include mobile-only {margin-left:0;}
+
+            .description {
+                font-size:18px;
+            }
+        }
+ 
+
+        .lentilles-container {
+            .lentille {
+                display: flex;
+                align-items: center;
+                margin-bottom: .5rem;
+
+                label {
+                    margin:0;
+                    font-weight: normal;
+                    font-size:18px;
+                }
+                input {
+                    margin:0;
+                    margin-right: .7rem;
+                    display: block;
+                    &:hover {cursor:pointer;}
+                }
+            }
+        }
+    }
+    
+    .price {
+        margin-bottom:20px;
+    }
+    
+    .lentilles-container {
+
+        display:flex;
+        flex-direction: column;
+
+        .lentille {
+            display:flex;
+            align-items:center;
+        }
+
+        input {
+            height:20px; 
+            width:20px;
+        }
+    }
+
+    .buttons-container {
+        margin-bottom: 3rem;
+        width:100%;
+
+        .ajouter {
+            $purple : #684ac2;
+            transition: all .2s linear; 
+            background-color: $purple;
+            &:hover {background-color:lighten($purple, 7%);}
+            span {color:white;}
+        }
+
+        .commander {
+            transition: all .2s linear; 
+            background-color: black;
+            &:hover {background-color:lighten(black, 20%);}
+            span {color:white;}
+        }
+    }
+
+  
+        
+    
+    
+
+
+}

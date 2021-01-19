@@ -1,0 +1,102 @@
+// TITRE + MINIATURES
+.products-container {
+
+    width: 95vw;
+    max-width: 1600px;
+
+
+    // Nos appareils
+    
+    
+    // MINIATURES
+    .cards-container {
+
+        @include flex-center;  
+        display: flex;
+        flex-wrap: wrap;   
+
+
+        .product-container {
+
+            perspective: 1000px;
+
+            width:450px;  
+            height:340px;
+            margin: 10px;
+            @include flex-center;
+
+            @include mobile-only {
+            width:300px;  
+            height:230px;
+            }
+
+            // Associe aléatoirement des animations
+            @for $i from 1 through 25 {
+                &[data-flip="#{$i}"] .card {
+                animation: flip-animation-#{nth($directions, random(4))} 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                }
+            } 
+
+            .card {
+
+                box-shadow: 2px 2px 8px 1px rgba(0,0,0,.2);
+                transition: all .1s linear;
+                @include parent-size;
+
+                .img-container {
+                    width: 100%;
+                    height: 85%;
+                    overflow: hidden;
+
+                    a {
+                        @include parent-size;
+                        @include center-background;
+                        transition: transform .5s ease-out;
+                        &:hover {transform: scale(1.05)}
+                    }
+                }
+    
+                .card-footer {
+
+                    background: white;
+                    height:15%;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0 5%;
+                    align-items: center;
+    
+                    .card-name {
+                        font-size:1.7rem;
+                        color:rgb(82, 82, 82);
+                    }
+    
+                    .card-price {
+                        font-size: 2rem;
+                        font-weight: bold;
+                    }
+    
+                }
+            }
+        }
+
+        .arrow-container {
+            width:130px;
+            height:130px;
+            @include flex-center;
+            border-radius: 50%;
+            transition: all .7s;
+        
+            .fa-arrow-right {
+                display: block;
+                font-size: 100px;
+            }
+        
+            &:hover {
+                box-shadow: 0 0 0px 30px rgba(132, 103, 231, .8);
+                .fa-arrow-right {animation: arrowSliding .7s linear both}
+            }
+
+        }
+
+    }
+}

@@ -1,0 +1,197 @@
+.cart-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width:90%;
+    max-width:1700px;
+    margin-bottom: 40px;
+
+    .resume-container{width:66%;}
+    .formulaire-container{width:33%;}
+
+    @include mobile-only {
+        flex-direction: column;
+        .resume-container{width:100%;}
+        .formulaire-container{width:100%;}
+    }
+}
+
+
+
+.part-container {
+
+    overflow: auto;
+    box-shadow: 0 .7rem 1.2rem rgba(0,0,0,.15);
+    padding: 30px;
+    margin:0;
+
+    @include non-desktop-only {width:100%}
+
+    h3 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-family: "Rock Salt";
+        font-size: 40px;
+        margin-bottom: 4rem;
+        text-align: center;
+    }
+
+    .total-container {
+        text-align: right;
+        h4 {font-size:5rem;}
+        .total{font-size: 5rem;}
+    }
+
+    // LISTE PRODUITS
+    .product-resume {
+
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        .miniature-container {
+
+            display: flex;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            
+            @include non-desktop-only{justify-content: center;}      
+            
+            
+    
+            .image-container {
+    
+                max-width:375px;
+                display: flex;
+                align-items: center;
+                flex-shrink: 0;
+
+                @include non-desktop-only{flex-direction: column}                
+
+                   
+    
+                    .options-container {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;  
+                        align-items:center;
+                        font-size:30px;
+                        margin: 5px 15px;
+
+                        @include non-desktop-only{flex-direction: row};
+                   
+
+                    .far, .fas {
+                        font-size:50px;
+                        margin: 7px;
+                    }
+
+                    .plus {
+                        @include non-desktop-only{order: 3};
+                        order:1;
+                    }
+
+                    input {
+                        order:2;
+                    }
+
+                    .minus{
+                        @include non-desktop-only{order: 1};
+                        order:3;
+                    }
+                }
+    
+            }
+    
+    
+            .total {
+                font-size: 30px;
+                @include non-desktop-only{display:none;}
+                display:flex;
+                align-items:center;
+                flex-grow: 1;
+                flex-shrink:1;
+                
+                .price {
+                    margin-right: 35px;
+                }
+
+                .subtotal {
+                    font-weight: bold;
+                    display: flex;
+                    justify-content: space-between;
+
+                }
+
+                .equal-sign {
+                    margin-right: 20px;
+                }
+            }
+
+            .name-lens {
+                display: flex;
+                flex-direction: column;
+                width:100%;
+                @include non-desktop-only{align-items: center;} 
+        
+                .name-product {
+                    font-size: 30px;
+                }
+
+            }
+        }
+
+    }
+
+}
+
+
+
+.formulaire-container {
+
+    h3 {}
+
+    form {
+
+        .fields {
+
+           margin-bottom: 40px;
+
+            .form-group {
+
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    font-weight:400;
+                    font-size:16px;
+                    margin-bottom: 10px;
+                }
+
+                input {
+                    font-size:16px;
+                    padding: 17px 10px;
+                }
+
+            }
+
+        }
+
+        button {
+            width:100%;
+            color:white;
+            font-weight: 500;
+            font-size: 18px;
+            border-radius: 5px;
+            background-color:$purple;
+            border:none;
+            padding: 10px;
+            transition: all linear .1s;
+            .fas {
+                color:white;
+                margin: 0 5px;
+            }
+            &:hover {background-color: darken($purple, 5%);}
+        }
+    }
+}

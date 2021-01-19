@@ -1,0 +1,29 @@
+/* UTILS */
+
+@import "./utils/variables.scss";
+@import "./utils/animations.scss";
+@import "./utils/fonts.scss";
+@import "./utils/functions.scss";
+@import "./utils/mixins.scss";
+
+/* BASE */
+
+@import "./base/base.scss";
+
+/* COMPONENTS */
+
+@import "./components/button.scss";
+@import "./components/loader.scss";
+@import "./components/popup.scss";
+
+/* LAYOUTS */
+
+@import "./navbar.scss";
+@import "./layouts/greycover.scss";
+
+/* PAGES */
+
+@import "./pages/index.scss";
+@import "./pages/product.scss";
+@import "./pages/commande.scss";
+@import "./pages/confirmation.scss";

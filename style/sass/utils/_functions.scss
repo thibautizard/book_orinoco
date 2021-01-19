@@ -1,0 +1,15 @@
+@function degree($direction) {
+    @if($direction == left or $direction == top) {
+        @return 90deg;
+    } @else {
+        @return -90deg;
+    }
+}
+
+@function axe($direction) {
+    @if($direction == left or $direction == right) {
+        @return Y;
+    } @else {
+        @return X;
+    }
+}

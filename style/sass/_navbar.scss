@@ -1,0 +1,58 @@
+nav {
+
+    background: white;
+    transition: box-shadow .1s linear;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top:0;
+    width:100vw;
+    padding: 0 1rem;
+    z-index: 1;
+
+
+    // BOUTONS HOME ET PANIER
+    .fa, .fas {
+
+        font-size:4.5rem;
+
+        &:hover {
+            background: linear-gradient(120deg, purple, $purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    .nav-title {
+        font-family: 'Pacifico';
+        font-size:7rem;
+        background: -webkit-linear-gradient(0deg, $orange 7%, $purple);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+ 
+    .counter {
+        font-size: 1rem;
+        font-family: "Rock Salt";
+        font-weight: bold;
+        text-align: center;
+        color:white;
+        border-radius: 50%;
+        line-height: 2.8rem;
+
+
+        position:absolute;
+        background: rgb(224, 2, 2);
+        top:30px;
+        right:1.5rem;
+        width:2.8rem;
+        height:2.8rem;
+    }
+
+    &.shadow {
+        box-shadow: 2px 2px 8px 1px rgba(0,0,0,.2);
+    }
+    
+}

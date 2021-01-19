@@ -1,0 +1,73 @@
+$size: 10px;
+$anim-dur: 500ms;
+$anim-delay: 80ms;
+
+$cd-bars-inv: $blueLoader;
+
+.container-loader {
+    height: $size;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    margin-left: -40px;
+    margin-top: 0px;
+}
+
+.load {
+
+    width: $size * 10;
+    height: $size * 7.5;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 0;
+    
+    &__bar {
+        background-color: $purple;
+        height: 100%;
+        width: $size;
+        animation: bars $anim-dur backwards infinite alternate ease-in-out;
+        @for $i from 1 through 5 {
+            &--#{$i} {
+                animation-delay: $anim-delay * ($i - 1);
+            }
+            &--#{$i}-inv {
+                animation-delay: $anim-delay * (6 - $i);
+                animation-direction: alternate-reverse;
+                // animation-fill-mode: forwards;
+                background: $cd-bars-inv;
+                &:hover {
+                    animation-play-state: paused;
+                }
+            }
+        }
+        @for $i from 1 through 5 {
+            &--#{$i + 5} {
+                animation-direction: alternate-reverse;
+                background: pink;
+                animation-delay: $anim-delay * $i + (random(100)*20ms);
+                
+                &:hover {
+                    animation-play-state: paused;
+                }
+            }
+        }
+    }
+}
+
+  
+@keyframes bars {
+
+    0% { 
+        transform: scaleY(0.3);
+        opacity: 0;
+    }  
+    
+    100% { 
+        transform: scaleY(1.0);
+        opacity:1;
+    }
+}
