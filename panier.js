@@ -4,21 +4,22 @@ let products = Object.entries(getProductsSession().reduce((acc, product) => {
     return acc
 }, {}))
 
-const container = document.querySelector(".cart-container")
 const resume = document.querySelector(".product-resume")
 const form = document.querySelector("form")
-const coverForm = document.querySelector(".cover-form")
 
-if(+localStorage.getItem("total") > 0) coverForm.style.display = "none"
+if(localStorage.getItem("total") === "0") { display(greyCover, "block"); display(loader, "none") }
+if(localStorage.getItem("total") !== "0")   display(loader, "")
 
-container.style.display = "none"
+okButton.addEventListener("click", _ => closePopup())
 
-Promise.all(products.map(product => {
+const arrayPromises = products.map(product => {
 
     const [id, lens] = product[0].split("_")
     const quantity = product[1]
 
-    fetch(`http://localhost:3000/api/cameras/${id}`)
+    return new Promise(resolve => {
+
+        fetch(`${apiAddress}/api/cameras/${id}`)
         .then(response => response.json())
         .then(product => {
 
@@ -48,7 +49,7 @@ Promise.all(products.map(product => {
                     <!-- CALCULS -->
                     <div class="total">
                             <p class="price"><i class="fas fa-times"></i> ${formatPrice(price/100)} </p>
-                            <p class="subtotal"> <span class="equal-sign"> = </span> <span class="subtotal-price" product="${id}"> ${formatPrice(price/100  * quantity)} </span></p>
+                            <p class="subtotal"> <span class="equal-sign"> = </span> <span class="subtotal-price" product="${id}_${lens}"> ${formatPrice(price/100  * quantity)} </span></p>
                     </div>
 
                     <!-- NOM -->
@@ -64,23 +65,33 @@ Promise.all(products.map(product => {
 
                 </div>`
 
-                // Append product to resume
-                resume.innerHTML += productElement
-                
+                resolve(productElement)
         })
+    })
     
-}))
-.then(_ => {
-    loader.style.display = "none"
-    container.style.display = ""
 })
+
+Promise.all(arrayPromises)
+        .then(allProducts => {
+            resume.innerHTML = allProducts.join('')
+            setTimeout(_ => {display(container); display(loader, "none")}, 1000)
+        })
+        .catch(e => {
+                throw Error("Les produits du panier n'ont pas pu être récupérés !")
+        })
 
 
 form.addEventListener("submit", e => {
 
     e.preventDefault()
 
+    // AJOUTER DES CONTROLES DES INPUTS
+
     const inputs = Array.from(e.currentTarget.querySelectorAll("input"))
+    if(!controlInputs(inputs)) {
+        openPopup("Les données entrées ne sont pas valides. Veuillez réessayer")
+        return
+    }
 
     const contact = inputs.reduce((contact, input) => {
         contact[input.id] = input.value
@@ -90,7 +101,7 @@ form.addEventListener("submit", e => {
     const products = getProductsSession("id")
 
         console.log(products)
-        fetch(`http://localhost:3000/api/cameras/order`, { 
+        fetch(`${apiAddress}/cameras/order`, { 
             method: 'POST',
             headers: {
                 'Accept' : 'application/json, text/plain',
@@ -101,7 +112,7 @@ form.addEventListener("submit", e => {
         .then(response => {
             if(response.ok) return response.json()
             else {
-                displayAlert("La validation de la commande a échoué 😭")
+                openPopup("La validation de la commande a échoué 😭")
                 throw new Error("La validation de la commande a échoué 😭")
             }
         })
@@ -109,13 +120,12 @@ form.addEventListener("submit", e => {
             localStorage.setItem("products", "")
             localStorage.setItem("orderId", jsonResponse.orderId)
             emptyFields()
-
-            window.location.href = window.location.href.replace("commande", "confirmation");
+            window.location.href = window.location.href.replace("panier", "confirmation");
         })
 
 })
 
-coverForm.addEventListener("click", e => displayAlert("Votre panier est vide ! 😔"))
+greyCover.addEventListener("click", e => openPopup("Votre panier est vide ! 😔"))
 
 
 

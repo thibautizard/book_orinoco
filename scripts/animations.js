@@ -39,7 +39,6 @@ function restoreFlip(e) {
 }
 
 function addShadow(threshold, contrast) {
-    console.log(threshold, contrast)
     const navbar = document.querySelector("nav")
     const scroll = window.scrollY
 
@@ -47,45 +46,34 @@ function addShadow(threshold, contrast) {
     navbar.style.opacity = scroll > threshold ? 1-contrast : 1
 }
 
-function displayAlert(text, eventToPrevent) {
+function openPopup(text, eventToPrevent) {
 
     if(eventToPrevent) eventToPrevent.preventDefault()
-    
-
-    const grey = document.querySelector(".grey-cover")
-    if(grey) {
-        grey.style.opacity = ".5"
-        grey.style.visibility = "visible"
-        grey.style.height = `100vh`
-    }
-
-    
-
-    const popUp = document.querySelector(".alert")
+    display(greyCover, "block")
      
     popUp.firstElementChild.textContent = text
+    popUp.style.top = `${window.scrollY + window.innerHeight/2}px`
     popUp.style.visibility = "visible"
+
     popUp.classList.remove("pop-up-reverse")
     void popUp.offsetWidth
     popUp.classList.add("pop-up")
 
 }
 
-function closeAlert() {
-
-
-    if(greyCover) {
-        greyCover.style.visibility = "hidden"
-        greyCover.style.opacity = "0"
-    }
-
+function closePopup() {
     const popUp = document.querySelector(".alert")
     popUp.classList.remove("pop-up")
     void popUp.offsetWidth
     popUp.classList.add("pop-up-reverse")
 }
 
+
 function animateButton(button) {
     button.classList.replace("far", "fas")
     setTimeout(() => button.classList.replace("fas", "far"), 100)
+}
+
+function display(element, value='') {
+    element.style.display = value
 }

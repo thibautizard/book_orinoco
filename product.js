@@ -2,13 +2,18 @@ const path = window.location.pathname
 const pathSegments = path.split("/")
 const id = window.location.search.substr(1).split("=")[1]
 
-const container = document.querySelector(".details-container")
-container.style.display = 'none'
+display(container, "none")
 
-fetch(`http://localhost:3000/api/cameras/${id}`)
+greyCover.addEventListener("click", e => {
+    display(greyCover, 'none')
+    closePopup()
+})
+
+fetch(`${apiAddress}/api/cameras/${id}`)
         .then(response => response.json())
         .then(product => {
-            container.style.display = ''
+
+            display(container)
             loader.style.display = "none"
 
             const { name, price, description, imageUrl } = product
@@ -30,12 +35,19 @@ fetch(`http://localhost:3000/api/cameras/${id}`)
 
             lentilles.innerHTML = lentillesHTML
 
-           const ajouter = document.querySelector(".ajouter")
-           ajouter.addEventListener("click", () => {
+           
+
+           addButton.addEventListener("click", () => {
                const lens = document.querySelector("input:checked+label").textContent               
                addItem(id, name, lens, price, true)
-               displayAlert(`L'appareil ${name} à lentille ${lens} a été ajouté à votre panier !`)
+               openPopup(`L'appareil ${name} à lentille ${lens} a été ajouté à votre panier !`)
            })
+
+           okButton.addEventListener("click", _ => {
+               closePopup()
+               display(greyCover, "none")
+           })
+
 
 
         })

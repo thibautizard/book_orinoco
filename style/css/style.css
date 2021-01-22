@@ -241,7 +241,7 @@ p {
 .load__bar--6 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 1260ms;
+  animation-delay: 180ms;
 }
 .load__bar--6:hover {
   animation-play-state: paused;
@@ -249,7 +249,7 @@ p {
 .load__bar--7 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 780ms;
+  animation-delay: 600ms;
 }
 .load__bar--7:hover {
   animation-play-state: paused;
@@ -257,7 +257,7 @@ p {
 .load__bar--8 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 1700ms;
+  animation-delay: 480ms;
 }
 .load__bar--8:hover {
   animation-play-state: paused;
@@ -265,7 +265,7 @@ p {
 .load__bar--9 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 540ms;
+  animation-delay: 680ms;
 }
 .load__bar--9:hover {
   animation-play-state: paused;
@@ -273,7 +273,7 @@ p {
 .load__bar--10 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 1200ms;
+  animation-delay: 1480ms;
 }
 .load__bar--10:hover {
   animation-play-state: paused;
@@ -405,22 +405,11 @@ nav.shadow {
   height: 100vh;
   position: absolute;
   z-index: 1;
-  top: 0;
+  top: 100px;
+  left: 0;
   opacity: 0.4;
   background-color: grey;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.cover-form {
-  width: 100%;
-  height: 100%;
-  background-color: grey;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.5;
-  cursor: not-allowed;
+  display: none;
 }
 
 /* PAGES */
@@ -451,79 +440,79 @@ nav.shadow {
   }
 }
 .products-container .cards-container .product-container[data-flip="1"] .card {
-  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="2"] .card {
-  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="3"] .card {
   animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="4"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="5"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="6"] .card {
   animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="7"] .card {
-  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="8"] .card {
   animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+.products-container .cards-container .product-container[data-flip="8"] .card {
+  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 .products-container .cards-container .product-container[data-flip="9"] .card {
-  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="10"] .card {
-  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="11"] .card {
   animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="12"] .card {
-  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="13"] .card {
-  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="14"] .card {
-  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="15"] .card {
   animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="16"] .card {
-  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="17"] .card {
   animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.products-container .cards-container .product-container[data-flip="18"] .card {
+.products-container .cards-container .product-container[data-flip="17"] .card {
   animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.products-container .cards-container .product-container[data-flip="18"] .card {
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="19"] .card {
-  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="20"] .card {
-  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="21"] .card {
-  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="22"] .card {
   animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="23"] .card {
-  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="24"] .card {
-  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="25"] .card {
-  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container .card {
   box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);

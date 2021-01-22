@@ -1,10 +1,11 @@
 let productsContainer = document.querySelector(".cards-container")
 
-fetch(`http://localhost:3000/api/cameras`)
+fetch(`${apiAddress}/api/cameras`)
         .then(response => response.json())
         .then(products => {
 
-           loader.style.display = "none"
+           let allProducts = ""
+
            products.forEach(product => {
 
                 let productElement = `
@@ -28,7 +29,7 @@ fetch(`http://localhost:3000/api/cameras`)
                 
                 </div>
                 `
-                productsContainer.innerHTML += productElement
+                allProducts += productElement
            })
 
            const arrow = `
@@ -38,7 +39,14 @@ fetch(`http://localhost:3000/api/cameras`)
                         </a>
             </div>
             `
-           
+           productsContainer.innerHTML += (allProducts + arrow)
+        
+        })
+        .then(_ => {
 
-           productsContainer.innerHTML += arrow
+            setTimeout(_ => {
+                display(container)
+                display(loader, "none")
+            }, 1300)
+ 
         })

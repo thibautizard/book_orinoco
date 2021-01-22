@@ -9,7 +9,8 @@
     <script src="./scripts/animations.js" defer></script>
     <script src="./scripts/utils.js" defer></script>
     <script src="./scripts/settle.js" defer></script>
-    <script src="./commande.js" defer></script>
+    <script src="./scripts/form.js" defer></script>
+    <script src="./panier.js" defer></script>
     <title>Orinoco</title>
 </head>
 <body>
@@ -29,7 +30,7 @@
             
 
                 <!-- PANIER -->
-                <a href="./commande.html" class="navbar-brand">
+                <a href="./panier.html" class="navbar-brand">
                         <i class="fas fa-cart-plus"> </i>
                         <div class="counter"> 0 </div>
                 </a>
@@ -98,13 +99,15 @@
                         <!-- BOUTON ENVOYER -->
                         <button type="submit" className="btn btn-primary w-100"> Envoyer <i class="fas fa-paper-plane"></i> </button>
                     </form>
-                    <div class="cover-form"></div>                  
                 </div> 
-
+                
             </div>
-
+            
             
         </main>
+        
+        <!-- GREY COVER -->
+        <div class="grey-cover"></div>  
 
         <!-- LOADER -->
         <div class="container-loader">
