@@ -1,31 +1,29 @@
-let products = Object.entries(getProductsSession().reduce((acc, product) => {
-    if(!acc[`${product.id}_${product.lens}`]) acc[`${product.id}_${product.lens}`] = 1
-    else acc[`${product.id}_${product.lens}`] ++
+// Récupère les produits du panier et associé les quantités correspondantes à chaque couple appareil x lentille
+let products = Object.entries(
+  getProductsSession().reduce((acc, product) => {
+    acc[`${product.id}_${product.lens}`] ? acc[`${product.id}_${product.lens}`]++ : acc[`${product.id}_${product.lens}`] = 1;
     return acc
-}, {}))
+  }, {})
+);
 
-const resume = document.querySelector(".product-resume")
-const form = document.querySelector("form")
+// Si panier vide on met l'écran gris, si panier plein on affiche le loader en attendant que tout charge
+localStorage.getItem("total") === "0" ? display(greyCover, "block") && display(loader, "none") : display(loader, "");
 
-if(localStorage.getItem("total") === "0") { display(greyCover, "block"); display(loader, "none") }
-if(localStorage.getItem("total") !== "0")   display(loader, "")
+const resume = document.querySelector(".product-resume");
+const form = document.querySelector("form");
 
-okButton.addEventListener("click", _ => closePopup())
+// On crée une promise pour chaque produit du panier dont on charge les informations via l'API
+Promise.all(products.map((product) => {
+  const [id, lens] = product[0].split("_");
+  const quantity = product[1];
 
-const arrayPromises = products.map(product => {
+  return new Promise((resolve) => {
+    fetch(`${apiAddress}/api/cameras/${id}`)
+      .then((response) => response.json())
+      .then((product) => {
+        const { name, price, imageUrl } = product;
 
-    const [id, lens] = product[0].split("_")
-    const quantity = product[1]
-
-    return new Promise(resolve => {
-
-        fetch(`${apiAddress}/api/cameras/${id}`)
-        .then(response => response.json())
-        .then(product => {
-
-            const { name, price, imageUrl } = product
-
-            productElement = `
+        productElement = `
                 <div class="miniature-container">
 
                     <!-- IMAGE -->
@@ -48,88 +46,83 @@ const arrayPromises = products.map(product => {
 
                     <!-- CALCULS -->
                     <div class="total">
-                            <p class="price"><i class="fas fa-times"></i> ${formatPrice(price/100)} </p>
-                            <p class="subtotal"> <span class="equal-sign"> = </span> <span class="subtotal-price" product="${id}_${lens}"> ${formatPrice(price/100  * quantity)} </span></p>
+                            <p class="price"><i class="fas fa-times"></i> ${formatPrice(price / 100)} </p>
+                            <p class="subtotal"> <span class="equal-sign"> = </span> <span class="subtotal-price" product="${id}_${lens}"> ${formatPrice((price / 100) * quantity)} </span></p>
                     </div>
 
                     <!-- NOM -->
                     <div class="name-lens w-100">
-                        <div class="name-product">
-                            ${name}
-                        </div>
+                        <div class="name-product"> ${name} </div>
 
                         <div class="lenses-information">
                             <p> LENTILLE : ${lens} </p>
                         </div>
                     </div>
 
-                </div>`
+                </div>`;
 
-                resolve(productElement)
-        })
-    })
-    
-})
+        resolve(productElement);
+      });
+  });
+}))
+.then((allProducts) => {
+    // Une fois tous les produits chargés, on crée un gros bloc HTML qu'on injecte dans le DOM
+    resume.innerHTML = allProducts.join("");
 
-Promise.all(arrayPromises)
-        .then(allProducts => {
-            resume.innerHTML = allProducts.join('')
-            setTimeout(_ => {display(container); display(loader, "none")}, 1000)
-        })
-        .catch(e => {
-                throw Error("Les produits du panier n'ont pas pu être récupérés !")
-        })
+    setTimeout((_) => {
+      display(container);
+      display(loader, "none");
+    }, 1000);
 
-
-form.addEventListener("submit", e => {
-
-    e.preventDefault()
-
-    // AJOUTER DES CONTROLES DES INPUTS
-
-    const inputs = Array.from(e.currentTarget.querySelectorAll("input"))
-    if(!controlInputs(inputs)) {
-        openPopup("Les données entrées ne sont pas valides. Veuillez réessayer")
-        return
-    }
-
-    const contact = inputs.reduce((contact, input) => {
-        contact[input.id] = input.value
-        return contact
-    }, {})
-
-    const products = getProductsSession("id")
-
-        console.log(products)
-        fetch(`${apiAddress}/cameras/order`, { 
-            method: 'POST',
-            headers: {
-                'Accept' : 'application/json, text/plain',
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify({contact,products})
-        })
-        .then(response => {
-            if(response.ok) return response.json()
-            else {
-                openPopup("La validation de la commande a échoué 😭")
-                throw new Error("La validation de la commande a échoué 😭")
-            }
-        })
-        .then(jsonResponse => {
-            localStorage.setItem("products", "")
-            localStorage.setItem("orderId", jsonResponse.orderId)
-            emptyFields()
-            window.location.href = window.location.href.replace("panier", "confirmation");
-        })
-
-})
-
-greyCover.addEventListener("click", e => openPopup("Votre panier est vide ! 😔"))
+  })
+  .catch((e) => {
+    throw Error("Les produits du panier n'ont pas pu être récupérés !");
+  });
 
 
+// Gestion du formulaire de commande
 
+form.addEventListener("submit", (e) => {
 
+  // On empêche la redirection automatique
+  e.preventDefault();
 
+  // On contrôles les entrées des inputs en javascript
+  const inputs = Array.from(e.currentTarget.querySelectorAll("input"));
+  !controlInputs(inputs) && openPopup("Les données entrées ne sont pas valides. Veuillez réessayer");
 
+  // On crée un object contact avec toutes les informations récoltées et contrôlées par le formulaire
+  const contact = inputs.reduce((contact, input) => {
+    contact[input.id] = input.value;
+    return contact;
+  }, {});
 
+  // On garde uniquement les id des produits achetés
+  const products = getProductsSession("id")
+
+  // On envoie la requête pour faire valider la commande
+  fetch(`${apiAddress}/api/cameras/order`, { 
+      method: 'POST',
+      headers: {
+          'Accept' : 'application/json, text/plain',
+          'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({contact,products})
+  })
+  .then(response => response.ok ? response.json() : new Error("La validation de la commande a échoué 😭"))
+  .then(jsonResponse => {
+      // On ajoute l'id de commande reçu au localStorage
+      localStorage.setItem("orderId", jsonResponse.orderId)
+      // On vide les inputs
+      emptyFields()
+      // On redirige sur la fenêtre de confirmation de commande
+      window.location.href = window.location.href.replace("panier", "confirmation");
+  })
+
+  
+});
+
+// Message d'avertissement si on clique sur la couverture grise si panier = 0
+greyCover.addEventListener("click", (e) =>
+  openPopup("Votre panier est vide ! 😔")
+);

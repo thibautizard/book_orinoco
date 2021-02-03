@@ -1,11 +1,15 @@
 let productsContainer = document.querySelector(".cards-container")
 
+// Récupération de tous les appareils photos disponibles sur l'API
 fetch(`${apiAddress}/api/cameras`)
-        .then(response => response.json())
+        .then(response => {
+            return response.json()
+        })
         .then(products => {
 
            let allProducts = ""
 
+           // Pour chaque apparail photo un composant HTML est généré puis injecté dans le DOM
            products.forEach(product => {
 
                 let productElement = `
@@ -32,6 +36,7 @@ fetch(`${apiAddress}/api/cameras`)
                 allProducts += productElement
            })
 
+           // Une miniature avec une flèche pour afficher les produits suivants est mise à la fin (non fonctionnelle)
            const arrow = `
            <div class="product-container product-container--arrow" href="/">
                         <a href="./index.html" class="arrow-container">
@@ -43,7 +48,7 @@ fetch(`${apiAddress}/api/cameras`)
         
         })
         .then(_ => {
-
+            // L'ensemble des produits n'est affiché qu'une fois l'ensemble complètement chargé
             setTimeout(_ => {
                 display(container)
                 display(loader, "none")
