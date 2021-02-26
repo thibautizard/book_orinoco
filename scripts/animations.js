@@ -47,11 +47,25 @@ function restoreFlip(e) {
 function addShadow(threshold, contrast) {
     const navbar = document.querySelector("nav")
     const scroll = window.scrollY
+    const navTitle = document.querySelector(".nav-title");
+    
+    const logosNavbar = Array.from(document.querySelectorAll(".navbar-brand"));
 
-    scroll > 0 ? navbar.classList.add("shadow") : navbar.classList.remove("shadow")
+    if (scroll > 70) {
+      navbar.classList.add("shadow");
+      logosNavbar.forEach((logo) => (logo.style.display = "none"));
+      navTitle.style.fontSize = "3rem";
+    }
+
+    if (scroll === 0) {
+      navbar.classList.remove("shadow");
+      logosNavbar.forEach((logo) => (logo.style.display = ""));
+      navTitle.style.fontSize = "7rem";
+    }
+
     navbar.style.opacity = scroll > threshold ? 1-contrast : 1
 }
-
+   
 // Ouvre une fenêtre d'information avec un message à afficher
 function openPopup(text, eventToPrevent) {
 

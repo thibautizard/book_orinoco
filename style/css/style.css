@@ -157,6 +157,10 @@ p {
   opacity: 0.3;
 }
 
+button[type=submit] {
+  opacity: 0.5;
+}
+
 .container-loader {
   height: 10px;
   display: flex;
@@ -179,7 +183,7 @@ p {
 }
 .load__bar {
   background-color: #8761f5;
-  height: 100%;
+  height: 60px;
   width: 10px;
   animation: bars 500ms backwards infinite alternate ease-in-out;
 }
@@ -241,7 +245,7 @@ p {
 .load__bar--6 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 180ms;
+  animation-delay: 1840ms;
 }
 .load__bar--6:hover {
   animation-play-state: paused;
@@ -249,7 +253,7 @@ p {
 .load__bar--7 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 600ms;
+  animation-delay: 1000ms;
 }
 .load__bar--7:hover {
   animation-play-state: paused;
@@ -257,7 +261,7 @@ p {
 .load__bar--8 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 480ms;
+  animation-delay: 1300ms;
 }
 .load__bar--8:hover {
   animation-play-state: paused;
@@ -265,7 +269,7 @@ p {
 .load__bar--9 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 680ms;
+  animation-delay: 1800ms;
 }
 .load__bar--9:hover {
   animation-play-state: paused;
@@ -273,7 +277,7 @@ p {
 .load__bar--10 {
   animation-direction: alternate-reverse;
   background: pink;
-  animation-delay: 1480ms;
+  animation-delay: 440ms;
 }
 .load__bar--10:hover {
   animation-play-state: paused;
@@ -353,7 +357,6 @@ p {
   animation-direction: reverse;
 }
 
-/* LAYOUTS */
 nav {
   background: white;
   transition: box-shadow 0.1s linear;
@@ -366,8 +369,19 @@ nav {
   padding: 0 1rem;
   z-index: 1;
 }
+@media screen and (max-width: 800px) {
+  nav {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
 nav .fa, nav .fas {
   font-size: 4.5rem;
+}
+@media screen and (max-width: 800px) {
+  nav .fa, nav .fas {
+    font-size: 3rem;
+  }
 }
 nav .fa:hover, nav .fas:hover {
   background: linear-gradient(120deg, purple, #8761f5);
@@ -378,8 +392,24 @@ nav .nav-title {
   font-family: "Pacifico";
   font-size: 7rem;
   background: -webkit-linear-gradient(0deg, #d98e34 7%, #8761f5);
+  transition: all 0.05s ease-out;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+@media screen and (max-width: 800px) {
+  nav .nav-title {
+    order: 1;
+  }
+}
+@media screen and (max-width: 800px) {
+  nav .home {
+    display: none;
+  }
+}
+@media screen and (max-width: 800px) {
+  nav .panier {
+    order: 3;
+  }
 }
 nav .counter {
   font-size: 1rem;
@@ -389,17 +419,29 @@ nav .counter {
   color: white;
   border-radius: 50%;
   line-height: 2.8rem;
-  position: absolute;
+  position: relative;
   background: #e00202;
-  top: 30px;
-  right: 1.5rem;
+  top: -280%;
+  right: -70%;
   width: 2.8rem;
   height: 2.8rem;
+}
+@media screen and (max-width: 800px) {
+  nav .counter {
+    position: relative;
+    top: -190%;
+    right: -70%;
+    font-size: 0.6rem;
+    line-height: 1.7rem;
+    width: 1.7rem;
+    height: 1.7rem;
+  }
 }
 nav.shadow {
   box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
+/* LAYOUTS */
 .grey-cover {
   width: 100vw;
   height: 100vh;
@@ -440,19 +482,19 @@ nav.shadow {
   }
 }
 .products-container .cards-container .product-container[data-flip="1"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="2"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="3"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="4"] .card {
   animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.products-container .cards-container .product-container[data-flip="5"] .card {
+.products-container .cards-container .product-container[data-flip="2"] .card {
+  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.products-container .cards-container .product-container[data-flip="3"] .card {
+  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.products-container .cards-container .product-container[data-flip="4"] .card {
   animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.products-container .cards-container .product-container[data-flip="5"] .card {
+  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="6"] .card {
   animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -461,55 +503,55 @@ nav.shadow {
   animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="8"] .card {
-  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="9"] .card {
   animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="10"] .card {
-  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="11"] .card {
-  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="12"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="13"] .card {
-  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="14"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="15"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="16"] .card {
-  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.products-container .cards-container .product-container[data-flip="17"] .card {
   animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.products-container .cards-container .product-container[data-flip="18"] .card {
+.products-container .cards-container .product-container[data-flip="13"] .card {
+  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.products-container .cards-container .product-container[data-flip="14"] .card {
+  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.products-container .cards-container .product-container[data-flip="15"] .card {
+  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.products-container .cards-container .product-container[data-flip="16"] .card {
+  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.products-container .cards-container .product-container[data-flip="17"] .card {
   animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.products-container .cards-container .product-container[data-flip="18"] .card {
+  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="19"] .card {
-  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="20"] .card {
-  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="21"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="22"] .card {
   animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="23"] .card {
-  animation: flip-animation-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="24"] .card {
-  animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: flip-animation-bottom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .products-container .cards-container .product-container[data-flip="25"] .card {
   animation: flip-animation-top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -749,9 +791,9 @@ nav.shadow {
 
 .part-container {
   overflow: auto;
-  box-shadow: 0 0.7rem 1.2rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.35rem 0.6rem rgba(0, 0, 0, 0.15);
   padding: 30px;
-  margin: 0;
+  margin-top: 20px;
 }
 @media screen and (max-width: 1400px) {
   .part-container {
@@ -828,6 +870,7 @@ nav.shadow {
 }
 .part-container .product-resume .miniature-container .image-container .options-container input {
   order: 2;
+  width: 50px;
 }
 .part-container .product-resume .miniature-container .image-container .options-container .minus {
   order: 3;
@@ -917,7 +960,8 @@ nav.shadow {
   background: white;
   text-align: center;
   box-shadow: 2px 2px 20px 1px rgba(0, 0, 0, 0.2);
-  padding: 40px;
+  padding: 20px 50px;
+  max-width: 90%;
 }
 .confirmation-message .cross-close {
   position: absolute;

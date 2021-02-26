@@ -21,9 +21,9 @@
 .part-container {
 
     overflow: auto;
-    box-shadow: 0 .7rem 1.2rem rgba(0,0,0,.15);
+    box-shadow: 0 .35rem .6rem rgba(0,0,0,.15);
     padding: 30px;
-    margin:0;
+    margin-top:20px;
 
     @include non-desktop-only {width:100%}
 
@@ -93,6 +93,7 @@
 
                     input {
                         order:2;
+                        width: 50px;
                     }
 
                     .minus{

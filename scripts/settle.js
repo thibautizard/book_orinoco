@@ -1,15 +1,18 @@
 // ! Définit l'adesse de l'API, place les animations de base de la page et récupère les éléments du DOM à manipuler
 
-// ? let apiAddress = "https://projet5-oc-api.herokuapp.com";
+// ? "https://projet5-oc-api.herokuapp.com";
 let apiAddress = "http://localhost:3000";
 
 window.addEventListener("scroll", _ => addShadow(0, .1))
+
+// Initialise à 0 les variables products et total si celles-ci n'existent pas
 if(!localStorage.getItem("products")) localStorage.setItem("products", "[]")
 if(!localStorage.getItem("total")) localStorage.setItem("total", 0)
 
-// Actualise le compteur de produits dans le panier
+// Actualise toujours le compteur visuel de produits à partir du localStorage
 actualizeCounter()
 
+// Identifie les principaux éléments et ajoute les animations principales
 const container = document.querySelector(`div[class$="container"]`)
 const loader = document.querySelector(".container-loader")
 const addButton = document.querySelector(".ajouter")

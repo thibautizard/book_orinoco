@@ -7,5 +7,9 @@ Désolé, vous n'avez passé aucune commande 🤷🏼‍♂️
 `
 
 // Vide le panier une fois le message de confirmation affiché
-const links = document.querySelectorAll("a")
-links.forEach(link => link.addEventListener("click", _ => localStorage.clear()))
+if (localStorage.getItem("orderId")) {
+  const links = document.querySelectorAll("a");
+  links.forEach((link) =>
+    link.addEventListener("click", (_) => localStorage.clear())
+  );
+}

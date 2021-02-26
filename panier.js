@@ -68,10 +68,9 @@ Promise.all(products.map((product) => {
 .then((allProducts) => {
     // Une fois tous les produits chargés, on crée un gros bloc HTML qu'on injecte dans le DOM
     resume.innerHTML = allProducts.join("");
-
+    display(loader, "none");
     setTimeout((_) => {
       display(container);
-      display(loader, "none");
     }, 1000);
 
   })
@@ -87,9 +86,17 @@ form.addEventListener("submit", (e) => {
   // On empêche la redirection automatique
   e.preventDefault();
 
-  // On contrôles les entrées des inputs en javascript
-  const inputs = Array.from(e.currentTarget.querySelectorAll("input"));
-  !controlInputs(inputs) && openPopup("Les données entrées ne sont pas valides. Veuillez réessayer");
+  if (!controlInputs()) {
+    openPopup("Les données entrées ne sont pas valides. Veuillez réessayer");
+    return;
+  }
+
+  if (localStorage.getItem("total") === "0") {
+    openPopup("Votre panier est vide ! 😔");
+    return;
+  }
+
+  const inputs = Array.from(document.querySelectorAll("form input"));
 
   // On crée un object contact avec toutes les informations récoltées et contrôlées par le formulaire
   const contact = inputs.reduce((contact, input) => {

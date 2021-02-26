@@ -1,4 +1,4 @@
-// !  FONCTIONS PAGE PANIER ET GESTION FORMULAIRE
+// !  FONCTIONS POUR LA PAGE PANIER ET LA GESTION DU FORMULAIRE
 
 // Ajoute ou supprime un produit en utilisant les options de la page panier
 function useButton(button) {
@@ -23,17 +23,34 @@ function useButton(button) {
     }
 }
 
-// Contrôle en js les entrées du formulaire
-function controlInputs(inputs) {
-    return inputs.every(input => {
-        if(input.classList.contains("name")) return /^[a-zA-Z,.'\s-]+$/.test(input.value)
-        if(input.classList.contains("address")) return /^[a-zA-Z1-9,.'\s-]+$/.test(input.value)
-        if(input.classList.contains("mail")) return /^\S+@\S+\.\S+$/.test(input.value)
-        
-    })
+// Contrôle en js les entrées du formulaire et renvoie true si tout est ok
+function controlInputs() {
+  const inputs = Array.from(document.querySelectorAll("form input"));
+  console.log(inputs)
+  return inputs.every((input) => {
+    if (input.classList.contains("name"))
+      return /^[a-zA-Z,.'\s-]+$/.test(input.value);
+    if (input.classList.contains("address"))
+      return /^\d+\s[A-z]+\s[A-z]+/.test(input.value);
+    if (input.classList.contains("mail"))
+      return /^\S+@\S+\.\S+$/.test(input.value);
+  });
 }
 
-// Vide les champs du formulaire après envoi
+function changeSubmitButton() {
+  const inputsValid = controlInputs();
+  const submitButton = document.querySelector("button[type='submit']")
+
+  if (inputsValid) {
+    submitButton.style.opacity = 1;
+    submitButton.style.backgroundColor = "#8761f5 !important";
+  } else {
+    submitButton.style.opacity = 0.5;
+    submitButton.style.backgroundColor = "lightgrey !important";
+  }
+}
+
+// Vide les champs du formulaire après envoi d'un formulaire correct
 function emptyFields() {
     const inputs = document.querySelectorAll("input")
     inputs.forEach(input => input.value = "")

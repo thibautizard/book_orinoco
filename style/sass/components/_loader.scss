@@ -27,7 +27,7 @@ $cd-bars-inv: $blueLoader;
     
     &__bar {
         background-color: $purple;
-        height: 100%;
+        height: 60px;
         width: $size;
         animation: bars $anim-dur backwards infinite alternate ease-in-out;
         @for $i from 1 through 5 {

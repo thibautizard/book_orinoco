@@ -48,10 +48,13 @@ fetch(`${apiAddress}/api/cameras`)
         
         })
         .then(_ => {
+            setTimeout((_) => {
+              display(loader, "none");
+            }, 700);
+            
             // L'ensemble des produits n'est affiché qu'une fois l'ensemble complètement chargé
             setTimeout(_ => {
-                display(container)
-                display(loader, "none")
+                display(container);
             }, 1300)
  
         })
