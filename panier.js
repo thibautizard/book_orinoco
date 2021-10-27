@@ -14,56 +14,55 @@ const form = document.querySelector("form");
 
 // On crée une promise pour chaque produit du panier dont on charge les informations via l'API
 Promise.all(products.map((product) => {
+
   const [id, lens] = product[0].split("_");
   const quantity = product[1];
 
-  return new Promise((resolve) => {
-    fetch(`${apiAddress}/api/cameras/${id}`)
-      .then((response) => response.json())
-      .then((product) => {
-        const { name, price, imageUrl } = product;
+  return fetch(`${apiAddress}/api/cameras/${id}`)
+          .then((response) => response.json())
+          .then((product) => {
+              const { name, price, imageUrl } = product;
 
-        productElement = `
-                <div class="miniature-container">
+              productElement = `
+                      <div class="miniature-container">
 
-                    <!-- IMAGE -->
-                    <div class="image-container">
+                          <!-- IMAGE -->
+                          <div class="image-container">
 
-                        <a class="image" href="">
-                            <img src=${imageUrl} alt="illustration appareil"/>
-                        </a>  
-                    
-                        
-                        <!-- OPTIONS -->
-                        <div class="options-container" name="${name}" product="${id}" lens="${lens}" price="${price}" >
-                            <i class="far plus fa-plus-square" onclick="useButton(this)"></i>
-                            <input type="text" class="product-counter text-center" size="2" readonly="readonly" value=${quantity} onFocus=""/>
-                            <i class="far minus fa-minus-square" onclick="useButton(this)"></i>
-                        </div>
+                              <a class="image" href="">
+                                  <img src=${imageUrl} alt="illustration appareil"/>
+                              </a>  
+                          
+                              
+                              <!-- OPTIONS -->
+                              <div class="options-container" name="${name}" product="${id}" lens="${lens}" price="${price}" >
+                                  <i class="far plus fa-plus-square" onclick="useButton(this)"></i>
+                                  <input type="text" class="product-counter text-center" size="2" readonly="readonly" value=${quantity} onFocus=""/>
+                                  <i class="far minus fa-minus-square" onclick="useButton(this)"></i>
+                              </div>
 
-                    </div>
+                          </div>
 
 
-                    <!-- CALCULS -->
-                    <div class="total">
-                            <p class="price"><i class="fas fa-times"></i> ${formatPrice(price / 100)} </p>
-                            <p class="subtotal"> <span class="equal-sign"> = </span> <span class="subtotal-price" product="${id}_${lens}"> ${formatPrice((price / 100) * quantity)} </span></p>
-                    </div>
+                          <!-- CALCULS -->
+                          <div class="total">
+                                  <p class="price"><i class="fas fa-times"></i> ${formatPrice(price / 100)} </p>
+                                  <p class="subtotal"> <span class="equal-sign"> = </span> <span class="subtotal-price" product="${id}_${lens}"> ${formatPrice((price / 100) * quantity)} </span></p>
+                          </div>
 
-                    <!-- NOM -->
-                    <div class="name-lens w-100">
-                        <div class="name-product"> ${name} </div>
+                          <!-- NOM -->
+                          <div class="name-lens w-100">
+                              <div class="name-product"> ${name} </div>
 
-                        <div class="lenses-information">
-                            <p> LENTILLE : ${lens} </p>
-                        </div>
-                    </div>
+                              <div class="lenses-information">
+                                  <p> LENTILLE : ${lens} </p>
+                              </div>
+                          </div>
 
-                </div>`;
+                      </div>`;
 
-        resolve(productElement);
-      });
-  });
+              return productElement;
+          });
 }))
 .then((allProducts) => {
     // Une fois tous les produits chargés, on crée un gros bloc HTML qu'on injecte dans le DOM
@@ -74,7 +73,7 @@ Promise.all(products.map((product) => {
     }, 1000);
 
   })
-  .catch((e) => {
+  .catch(() => {
     throw Error("Les produits du panier n'ont pas pu être récupérés !");
   });
 
@@ -118,12 +117,10 @@ form.addEventListener("submit", (e) => {
   })
   .then(response => response.ok ? response.json() : new Error("La validation de la commande a échoué 😭"))
   .then(jsonResponse => {
-      // On ajoute l'id de commande reçu au localStorage
-      localStorage.setItem("orderId", jsonResponse.orderId)
-      // On vide les inputs
-      emptyFields()
-      // On redirige sur la fenêtre de confirmation de commande
-      window.location.href = window.location.href.replace("panier", "confirmation");
+    // On vide les inputs
+    emptyFields();
+    // On redirige sur la fenêtre de confirmation de commande
+    window.location.assign(`confirmation.html?orderId=${jsonResponse.orderId}`);
   })
 
   

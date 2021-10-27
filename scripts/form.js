@@ -26,7 +26,6 @@ function useButton(button) {
 // Contrôle en js les entrées du formulaire et renvoie true si tout est ok
 function controlInputs() {
   const inputs = Array.from(document.querySelectorAll("form input"));
-  console.log(inputs)
   return inputs.every((input) => {
     if (input.classList.contains("name"))
       return /^[a-zA-Z,.'\s-]+$/.test(input.value);
